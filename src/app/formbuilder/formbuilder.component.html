@@ -1,0 +1,27 @@
+<form [formGroup]="formbuilder">
+    <h3>Form builder</h3>
+
+    <mat-form-field class="full">
+      <input matInput placeholder="Name of form" formControlName="name">
+    </mat-form-field>
+
+
+    <div formArrayName="inputs">
+        <div *ngFor="let input of formbuilder.controls.inputs.controls; let i=index" >
+          <div [formGroupName]="i">
+            <app-input [group]="formbuilder.controls.inputs.controls[i]"></app-input>
+            <button mat-raised-button color="warn" (click)="removeInput(i)">Delete </button>
+          </div>
+
+        </div>
+        <button mat-raised-button color="primary" (click)="addInput()">Add Input</button>
+        <!--
+        <button mat-raised-button color="warn" (click)="removeInput(i)">Delete </button>
+      -->
+    </div>
+
+
+</form>
+
+<h5>Details</h5>
+<pre>{{ formbuilder.value | json }}</pre>
